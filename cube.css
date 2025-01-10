@@ -6,13 +6,6 @@ body {
   margin: 0;
   perspective: 800px;
   user-select: none;
-
-  /* background img */
- /* background: url(bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; */
 }
 
 .scene {
@@ -25,7 +18,19 @@ body {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  animation: rotateCube 8s infinite linear;
+  animation: rotateFromPosition 8s infinite linear;
+  --start-rotation-x: 0deg;
+  --start-rotation-y: 0deg;
+}
+
+@keyframes rotateFromPosition {
+  from {
+    transform: rotateX(var(--start-rotation-x)) rotateY(var(--start-rotation-y));
+  }
+  to {
+    transform: rotateX(calc(var(--start-rotation-x) + 360deg))
+      rotateY(calc(var(--start-rotation-y) + 360deg));
+  }
 }
 
 .face {
@@ -38,37 +43,31 @@ body {
 .front {
   background: linear-gradient(45deg, #3498db, #2c3e50);
   transform: translateZ(50px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 .back {
   background: linear-gradient(45deg, #2c3e50, #3498db);
   transform: rotateY(180deg) translateZ(50px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 .right {
   background: linear-gradient(45deg, #3498db, #2c3e50);
   transform: rotateY(90deg) translateZ(50px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 .left {
   background: linear-gradient(45deg, #2c3e50, #3498db);
   transform: rotateY(-90deg) translateZ(50px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 .top {
   background: linear-gradient(45deg, #3498db, #2c3e50);
   transform: rotateX(90deg) translateZ(50px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 .bottom {
   background: #2c3e50;
   transform: rotateX(-90deg) translateZ(50px);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
 }
 
 .glow {
@@ -86,9 +85,9 @@ body {
 
 @keyframes pulsateGlow {
   from {
-    box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+    box-shadow: none;
   }
   to {
-    box-shadow: 0 0 40px rgba(52, 152, 219, 1);
+    box-shadow: none;
   }
 }
